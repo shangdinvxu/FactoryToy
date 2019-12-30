@@ -5,22 +5,35 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/iv_face"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="50dp"
+        >
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:src="@mipmap/icon_back"
+            android:paddingTop="17dp"
+            android:paddingBottom="17dp"
+            android:scaleType="fitStart"
+            android:layout_marginLeft="15dp"/>
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="16sp" />
+    </RelativeLayout>
 
-    <Button
-        android:id="@+id/btn_face_detection"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="facedetection"
-        android:text="检测"
-        tools:ignore="OnClick" />
 
-    <TextView
-        android:id="@+id/tv_result"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        />
+
+
+
 
 </LinearLayout>

@@ -16,4 +16,11 @@ public class BankCardOcr {
 
     public static native String cardOcr(Bitmap bitmap);
 
+
+    public static native String getQrCodeResult(Bitmap bitmap);
+
+    public static native int getGmin();
+
+
+    public static native int setMin(int min);
 }
