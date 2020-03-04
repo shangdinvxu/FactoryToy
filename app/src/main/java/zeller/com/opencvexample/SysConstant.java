@@ -23,6 +23,7 @@ public interface SysConstant {
      * */
     String USER_NAME = "userName";
     String USER_PASSWORD = "userPassword";
+
     String USER_ID = "userId";
     String USERINFO = "userInfo";
 
