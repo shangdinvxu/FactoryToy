@@ -8,7 +8,7 @@
     <Button
         android:id="@+id/inactive"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:textSize="50sp"
         android:text="激活"
         />
@@ -18,7 +18,7 @@
         android:id="@+id/check"
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:textSize="50sp"
         android:text="校验"
         />
@@ -27,8 +27,17 @@
         android:id="@+id/productReturn"
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:textSize="50sp"
         android:text="不良品退回"
+        />
+
+    <Button
+        android:id="@+id/productReturnCount"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:textSize="50sp"
+        android:text="不良品统计"
         />
 </LinearLayout>

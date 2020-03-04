@@ -11,6 +11,7 @@ import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -21,6 +22,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Vector;
 
 import lib_zxing.camera.CameraManager;
@@ -138,9 +140,11 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    handler.restartPreviewAndDecode();
+                    if (handler!=null){
+                        handler.restartPreviewAndDecode();
+                    }
                 }
-            },2000);
+            },3000);
         }
 
         if (result == null || TextUtils.isEmpty(result.getText())) {

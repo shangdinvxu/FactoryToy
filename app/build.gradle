@@ -6,8 +6,8 @@ android {
         applicationId "zeller.com.opencvexample"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 3
-        versionName "3.0"
+        versionCode 8
+        versionName "8.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
@@ -36,9 +36,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    externalNativeBuild {
-        cmake {
-            path "CMakeLists.txt"
+    signingConfigs {
+        release {
+            storeFile file { "efeelink.keystore" }
+            keyAlias "efeelink_cer"
+            keyPassword "efeelink@sz"
+            storePassword "efeelink@sz"
         }
     }
 }
@@ -74,6 +77,9 @@ dependencies {
 
     //fir更新库
     implementation 'cn.hugeterry.updatefun:updatefun:2.0.6'
+
+    //各种工具类
+    implementation 'com.blankj:utilcode:1.20.4'
 
 //    implementation 'com.sunfusheng:FirUpdater:1.1.1'
 

@@ -92,18 +92,18 @@ final class DecodeHandler extends Handler {
         } finally {
             multiFormatReader.reset();
         }
-        Bitmap bitmapResult = source.renderCroppedGreyscaleBitmap();
-        String qrCodeResult = BankCardOcr.getQrCodeResult(bitmapResult);
-        Log.e("QrCodeResult","扫描的结果是"+qrCodeResult);
-        if(!qrCodeResult.equals("")){
-            Message message = Message.obtain(fragment.getHandler(), R.id.opencv_decode_succeeded, qrCodeResult);
-            Bundle bundle = new Bundle();
-            bundle.putParcelable(DecodeThread.BARCODE_BITMAP, source.renderCroppedGreyscaleBitmap());
-            message.setData(bundle);
-            //Log.d(TAG, "Sending decode succeeded message...");
-            Log.e("QrCodeResultGmin","Gmin"+BankCardOcr.getGmin());
-            message.sendToTarget();
-        }
+//        Bitmap bitmapResult = source.renderCroppedGreyscaleBitmap();
+//        String qrCodeResult = BankCardOcr.getQrCodeResult(bitmapResult);
+//        Log.e("QrCodeResult","扫描的结果是"+qrCodeResult);
+//        if(!qrCodeResult.equals("")){
+//            Message message = Message.obtain(fragment.getHandler(), R.id.opencv_decode_succeeded, qrCodeResult);
+//            Bundle bundle = new Bundle();
+//            bundle.putParcelable(DecodeThread.BARCODE_BITMAP, source.renderCroppedGreyscaleBitmap());
+//            message.setData(bundle);
+//            //Log.d(TAG, "Sending decode succeeded message...");
+//            Log.e("QrCodeResultGmin","Gmin"+BankCardOcr.getGmin());
+//            message.sendToTarget();
+//        }
 
         if (rawResult != null) {
             long end = System.currentTimeMillis();

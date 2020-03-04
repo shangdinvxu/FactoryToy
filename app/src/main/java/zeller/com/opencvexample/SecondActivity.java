@@ -65,7 +65,6 @@ public class SecondActivity extends Activity {
                 startActivity(intent);
             }
         });
-
     }
 
     @OnClick(R.id.img_back)

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:src="@mipmap/icon_back"
+            android:paddingTop="17dp"
+            android:paddingBottom="17dp"
+            android:scaleType="fitStart"
+            android:layout_marginLeft="15dp"/>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/state1"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:textSize="50sp"
+        android:text="退回"
+        />
+
+
+    <Button
+        android:id="@+id/state2"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:textSize="50sp"
+        android:text="报废"
+        />
+
+</LinearLayout>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:src="@mipmap/icon_back"
+            android:paddingTop="17dp"
+            android:paddingBottom="17dp"
+            android:scaleType="fitStart"
+            android:layout_marginLeft="15dp"/>
+        <TextView
+            android:id="@+id/tv_title"
+            android:text="选择统计时间"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/selectStartBtn"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:text="选择开始日期"
+            />
+
+        <TextView
+            android:id="@+id/startDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="20sp"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/selectEndBtn"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:text="选择结束日期"
+            />
+
+        <TextView
+            android:id="@+id/endDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="20sp"
+            />
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/sureBtn"
+        android:layout_marginTop="240dp"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:text="确认"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        />
+
+
+
+</LinearLayout>

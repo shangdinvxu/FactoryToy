@@ -53,6 +53,10 @@ public class MyCaptureActivity extends AppCompatActivity {
     @BindView(R.id.type)
     TextView typeTv;
 
+    String state ;
+
+    AlertDialog alertDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -77,13 +81,18 @@ public class MyCaptureActivity extends AppCompatActivity {
         });
         scanApi = RetrofitClient.getInstance(this).create(ScanApi.class);
         Intent intent = getIntent();
+        state = intent.getStringExtra("state");
         type = intent.getStringExtra("type");
         if ("inactive".equals(type)) {
             typeTv.setText("激活");
         } else if ("check".equals(type)) {
             typeTv.setText("校验");
         }else if ("productReturn".equals(type)) {
-            typeTv.setText("不良品退回");
+            if("1".equals(state)){
+                typeTv.setText("不良品退回");
+            }else {
+                typeTv.setText("不良品报废");
+            }
         }
         seriesCode = intent.getStringExtra("seriesCode");
         if (seriesCode != null) {
@@ -97,6 +106,8 @@ public class MyCaptureActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 }).create();
+
+
     }
 
     /**
@@ -116,12 +127,44 @@ public class MyCaptureActivity extends AppCompatActivity {
                     resultString = toyCode.substring(i + 3, toyCode.length());
                 }
                 if ("inactive".equals(type)) {
+                    final String finalResultString = resultString;
                     scanApi.toyCheck(resultString, seriesCode, dataBean.getProductCode()).enqueue(new Callback<CheckResponseBean>() {
                         @Override
                         public void onResponse(Call<CheckResponseBean> call, Response<CheckResponseBean> response) {
                             if (response.body() != null && response.body().getData() != null) {
-                                showSuccessDialog(response.body().getData());
-                            } else {
+                                    showSuccessDialog(response.body().getData());
+                            }else if(4==response.body().getCode()){
+//                                退回状态重新激活
+                                if(alertDialog==null ||!alertDialog.isShowing()){
+                                    alertDialog =  new AlertDialog.Builder(MyCaptureActivity.this).setTitle("激活玩具")
+                                            .setMessage("此玩具是售后状态,确定要重新激活玩具吗?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    scanApi.toyReInactive(finalResultString, seriesCode, dataBean.getProductCode()).enqueue(new Callback<CheckResponseBean>() {
+                                                        @Override
+                                                        public void onResponse(Call<CheckResponseBean> call, Response<CheckResponseBean> response) {
+                                                            if (response.body() != null && response.body().getData() != null) {
+                                                                showSuccessDialog(response.body().getData());
+                                                            }
+                                                        }
+
+                                                        @Override
+                                                        public void onFailure(Call<CheckResponseBean> call, Throwable t) {
+
+                                                        }
+                                                    });
+                                                }
+                                            }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                }
+                                            }).create();
+                                    alertDialog.show();
+                                }
+                            }else if(5==response.body().getCode()){
+                                showSuccessDialog("此玩具是报废状态");
+                            } else  {
                                 showSuccessDialog("扫描失败1");
                             }
                         }
@@ -137,6 +180,10 @@ public class MyCaptureActivity extends AppCompatActivity {
                         public void onResponse(Call<CheckSecondyResponseBean> call, Response<CheckSecondyResponseBean> response) {
                             if (response.body() != null && response.body().getData() != null) {
                                 showSuccessDialog(response.body().getData().getMsg());
+                            }else if(4==response.body().getCode()){
+                                showSuccessDialog("此玩具是退回状态");
+                            }else if(5==response.body().getCode()){
+                                showSuccessDialog("此玩具是报废状态");
                             } else {
                                 showSuccessDialog("扫描失败1");
                             }
@@ -148,11 +195,15 @@ public class MyCaptureActivity extends AppCompatActivity {
                         }
                     });
                 }else if ("productReturn".equals(type)) {
-                    scanApi.productReturn(resultString).enqueue(new Callback<CodeBean>() {
+                    scanApi.productReturn(resultString,state).enqueue(new Callback<CodeBean>() {
                         @Override
                         public void onResponse(Call<CodeBean> call, Response<CodeBean> response) {
                             if (response.body() != null && response.body().getCode() == 0) {
                                 showSuccessDialog("退回成功");
+                            }else if(4==response.body().getCode()){
+                                showSuccessDialog("此玩具是退回状态");
+                            }else if(5==response.body().getCode()){
+                                showSuccessDialog("此玩具是报废状态");
                             } else {
                                 showSuccessDialog("退回失败");
                             }

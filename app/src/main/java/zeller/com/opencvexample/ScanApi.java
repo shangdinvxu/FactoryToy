@@ -9,29 +9,39 @@ import retrofit2.http.Query;
  */
 public interface ScanApi {
 
-    //解析玩具
+    //激活
     @GET("toyCheck")
     Call<CheckResponseBean> toyCheck(@Query("c") String toy_code,@Query("productSeriesCode") String productSeriesCode, @Query("productCode") String productCode);
 
 
+    //重新激活
+    @GET("toyReInactive")
+    Call<CheckResponseBean> toyReInactive(@Query("c") String toy_code,@Query("productSeriesCode") String productSeriesCode, @Query("productCode") String productCode);
 
-    //解析玩具
+
+    //校验
     @GET("toyCheckSecondary")
     Call<CheckSecondyResponseBean> toyCheckSecondary(@Query("c") String toy_code,@Query("productSeriesCode") String productSeriesCode, @Query("productCode") String productCode);
 
-
-
-
-    //    获取玩具系列数据详细情况
+    // 获取玩具系列数据详细情况
     @GET("findCheckData")
     Call<AllDataBean> findCheckData();
 
+    // 根据不同权限获取玩具系列数据详细情况
+    @GET("findNewCheckDataById")
+    Call<AllDataBean> findNewCheckDataById(@Query("id") int id);
 
-    //解析玩具
+    //退回
     @GET("productReturn")
-    Call<CodeBean> productReturn(@Query("c") String toy_code);
+    Call<CodeBean> productReturn(@Query("c") String toyCode, @Query("toyState") String toyState);
 
+    //    获取玩具系列售后数据详细情况
+    @GET("findProductReturnData")
+    Call<ProductReturnDataBean> findProductReturnData(@Query("seriesId") String seriesId,
+                                                      @Query("startDate") String startDate,
+                                                      @Query("endDate") String endDate );
 
-
+    @GET("factoryVerify")
+    Call<VerifyBean> factoryVerify(@Query("code") String code);
 
 }

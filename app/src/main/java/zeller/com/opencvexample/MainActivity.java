@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SPUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import java.util.ArrayList;
@@ -45,6 +46,9 @@ public class MainActivity extends Activity {
     List<AllDataBean.DataBean> data = new ArrayList<>();
     FirstPageAdapter firstPageAdapter;
     String type;
+    String startTime;
+    String endTime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +60,8 @@ public class MainActivity extends Activity {
         initView();
         Intent intent = getIntent();
         type = intent.getStringExtra("type");
-
+        startTime = intent.getStringExtra("startTime");
+        endTime = intent.getStringExtra("endTime");
     }
 
     private void initView() {
@@ -69,7 +74,14 @@ public class MainActivity extends Activity {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 AllDataBean.DataBean dataBean = data.get(position);
-                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                Intent intent;
+                if("productReturnCount".equals(type)){
+                     intent = new Intent(MainActivity.this, ProductReturnCountActivity.class);
+                     intent.putExtra("startTime",startTime);
+                     intent.putExtra("endTime",endTime);
+                }else{
+                     intent = new Intent(MainActivity.this, SecondActivity.class);
+                }
                 intent.putExtra("data", dataBean);
                 intent.putExtra("type", type);
                 startActivity(intent);
@@ -86,7 +98,8 @@ public class MainActivity extends Activity {
     }
 
     private void initData() {
-        Call<AllDataBean> checkData = scanApi.findCheckData();
+        int id = SPUtils.getInstance().getInt("id");
+        Call<AllDataBean> checkData = scanApi.findNewCheckDataById(id);
         checkData.enqueue(new Callback<AllDataBean>() {
             @Override
             public void onResponse(Call<AllDataBean> call, Response<AllDataBean> response) {

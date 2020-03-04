@@ -23,7 +23,7 @@ import cn.hugeterry.updatefun.config.UpdateKey;
 /**
  * Created by Daniel.Xu on 2019-10-17.
  */
-public class selectActivity extends Activity {
+public class SelectActivity extends Activity {
     @BindView(R.id.inactive)
     Button inactive;
     @BindView(R.id.check)
@@ -39,7 +39,7 @@ public class selectActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_select);
         ButterKnife.bind(this);
-//        new FirUpdater(selectActivity.this)
+//        new FirUpdater(SelectActivity.this)
 //                .apiToken("f2a3d1973878abb5ba921a0176a5c1fb")
 //                .appId("5dad05ceb2eb4654cdb7a611")
 //                .checkVersion();
@@ -50,23 +50,28 @@ public class selectActivity extends Activity {
     }
 
 
-    @OnClick({R.id.inactive, R.id.check,R.id.productReturn})
+    @OnClick({R.id.inactive, R.id.check,R.id.productReturn,R.id.productReturnCount})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.inactive:
-                Intent intent = new Intent(selectActivity.this, MainActivity.class);
+                Intent intent = new Intent(SelectActivity.this, MainActivity.class);
                 intent.putExtra("type", "inactive");
                 startActivity(intent);
                 break;
             case R.id.check:
-                Intent intent2 = new Intent(selectActivity.this, MainActivity.class);
+                Intent intent2 = new Intent(SelectActivity.this, MainActivity.class);
                 intent2.putExtra("type", "check");
                 startActivity(intent2);
                 break;
             case R.id.productReturn:
-                Intent intent3 = new Intent(selectActivity.this, MyCaptureActivity.class);
+                Intent intent3 = new Intent(SelectActivity.this, SelectToyStateActivity.class);
                 intent3.putExtra("type", "productReturn");
                 startActivity(intent3);
+                break;
+            case R.id.productReturnCount:
+                Intent intent4 = new Intent(SelectActivity.this, SelectDateActivity.class);
+                intent4.putExtra("type", "productReturnCount");
+                startActivity(intent4);
                 break;
         }
     }
