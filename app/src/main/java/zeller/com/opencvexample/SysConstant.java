@@ -1,7 +1,7 @@
 package zeller.com.opencvexample;
 
 public interface SysConstant {
-    String ROBOTIME_URL = "https://robotime.cn:8086/app/";
+    String ROBOTIME_URL = "https://cloud.robotime.cn/app/";
     String IMG_URL = "https://cdn.robotime.cn/";
 //    String ROBOTIME_URL = "http://192.168.3.197:8086/app/";
 //    String HTTP_URL = "http://192.168.3.197:8086/app/";

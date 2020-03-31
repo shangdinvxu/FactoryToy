@@ -1,7 +1,11 @@
 package zeller.com.opencvexample;
 
+import java.util.HashMap;
+
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -43,5 +47,16 @@ public interface ScanApi {
 
     @GET("factoryVerify")
     Call<VerifyBean> factoryVerify(@Query("code") String code);
+
+
+    //获取强制更新信息
+    @POST("home/getAppVersion")
+    Call<FirBean> getAppVersion(@Body HashMap hashMap);
+
+    /**
+     * fir 请求
+     * */
+    @GET("5dad05ceb2eb4654cdb7a611")
+    Call<FirBean> getFirVersion(@Query("api_token") String token );
 
 }
